@@ -21,7 +21,7 @@ This is an individual engineering project created and managed by Khaled.
 - **Project owner profile:** [GitHub profile](https://github.com/mhamedelmasery654-sys)
 - **Render service dashboard:** [Open service settings and logs](https://dashboard.render.com/web/srv-dbecidm7bikc7380h1c0) — requires access to the Render workspace.
 
-> The GitHub repository is private. The live project and health links are public, but GitHub source files require repository access.
+ > The live service links are public. GitHub source, Postman, and deployment-guide links follow the repository's visibility settings.
 
 ## Current Deployment
 
@@ -98,7 +98,7 @@ The WebSocket acknowledges an event after MongoDB accepts it. It is for recordin
 - [Deployment guide](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/DEPLOYMENT.md)
 - [Execution report](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/README-execution-report.md)
 
-These repository links require access while the repository is private.
+These files are stored in this repository; access follows the repository's visibility setting.
 
 ## Local Development
 
