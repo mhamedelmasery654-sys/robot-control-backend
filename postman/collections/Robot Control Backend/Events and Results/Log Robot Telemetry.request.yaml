@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/sessions/{{sessionId}}/events"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "source": "robot_bridge",
+      "category": "telemetry",
+      "eventName": "telemetry.snapshot",
+      "data": { "speedLevel": 4, "leftMotorPwm": 90, "rightMotorPwm": 90, "distanceCm": 42.5, "sensors": { "frontDistance": 42.5 } }
+    }
+order: 2000

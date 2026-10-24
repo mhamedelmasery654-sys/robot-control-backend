@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Robot Control Backend API
+  version: 1.0.0
+  description: Authenticated event and result storage for robot-control sessions. Does not actuate hardware.
+servers:
+  - url: http://127.0.0.1:8787/api/v1
+paths:
+  /health/live:
+    get:
+      security: []
+      summary: Liveness probe
+      responses:
+        '200': { description: API process is alive }
+  /health/ready:
+    get:
+      security: []
+      summary: Database readiness probe
+      responses:
+        '200': { description: PostgreSQL and MongoDB are reachable }
+        '503': { description: One or more databases are unavailable }
+  /auth/register:
+    post:
+      security: []
+      summary: Register an operator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, minLength: 12, maxLength: 72 }
+      responses:
+        '201': { description: Account created; returns a JWT }
+        '409': { description: Email already used }
+  /auth/login:
+    post:
+      security: []
+      summary: Sign in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        '200': { description: Authenticated; returns a short-lived JWT }
+        '401': { description: Invalid credentials }
+  /auth/me:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Read the current user profile
+      responses:
+        '200': { description: Safe user profile }
+  /sessions:
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Start a control session
+      responses:
+        '201': { description: Session created }
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: List the caller's control sessions
+      responses:
+        '200': { description: Session page }
+  /sessions/{sessionId}/events:
+    parameters:
+      - in: path
+        name: sessionId
+        required: true
+        schema: { type: string, format: uuid }
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Persist one allow-listed event or result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [source, category, eventName, data]
+              properties:
+                eventId: { type: string, format: uuid }
+                source: { type: string, enum: [web, gamepad, remote, voice, robot_bridge, system] }
+                category: { type: string, enum: [control_input, device_status, controller_selection, voice_status, robot_status, telemetry, command_result] }
+                eventName: { type: string, maxLength: 64 }
+                outcome: { type: string, enum: [accepted, rejected, started, completed, failed, stopped] }
+                occurredAt: { type: string, format: date-time }
+                data: { type: object }
+      responses:
+        '201': { description: Event stored }
+        '200': { description: Duplicate event acknowledged idempotently }
+        '400': { description: Invalid event payload }
+        '409': { description: Session is closed }
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Read event history by cursor
+      responses:
+        '200': { description: Event page }
+  /sessions/{sessionId}/close:
+    parameters:
+      - in: path
+        name: sessionId
+        required: true
+        schema: { type: string, format: uuid }
+    post:
+      security: [{ bearerAuth: [] }]
+      summary: Close the control session
+      responses:
+        '200': { description: Session closed }
+  /admin/users:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Admin-only safe user list
+      responses:
+        '200': { description: User page without password hashes }
+  /admin/audit:
+    get:
+      security: [{ bearerAuth: [] }]
+      summary: Admin-only audit history
+      responses:
+        '200': { description: Audit event page }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

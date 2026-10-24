@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/sessions"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "label": "Postman verification session"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) pm.environment.set('sessionId', pm.response.json().data.id);
+      pm.test('Session created', () => pm.response.to.have.status(201));
+    language: text/javascript
+order: 1000

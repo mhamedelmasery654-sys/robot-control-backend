@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/sessions/{{sessionId}}/events"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "eventId": "{{eventId}}",
+      "source": "gamepad",
+      "category": "control_input",
+      "eventName": "button.pressed",
+      "data": { "buttonsPressed": ["A"] }
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Input event stored or duplicate acknowledged', () => pm.expect([200, 201]).to.include(pm.response.code));
+    language: text/javascript
+order: 1000

@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: robot-control-backend
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: RUN_MIGRATIONS
+        value: "true"
+      - key: PUBLIC_ORIGINS
+        value: http://localhost:8765,http://127.0.0.1:8765
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: MONGODB_URI
+        sync: false

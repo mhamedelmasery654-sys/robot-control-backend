@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/sessions/{{sessionId}}/close"
+method: POST
+scripts:
+  - type: afterResponse
+    code: pm.test('Session closed', () => pm.response.to.have.status(200));
+    language: text/javascript
+order: 3000

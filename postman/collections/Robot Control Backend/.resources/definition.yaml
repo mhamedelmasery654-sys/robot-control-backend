@@ -1,0 +1,15 @@
+$kind: collection
+description: "Task 8 style API collection: account, sessions, and event/result persistence. No physical robot commands are sent."
+variables:
+  baseUrl: http://127.0.0.1:8787/api/v1
+  email: operator@example.com
+  password: change-this-password-123
+  accessToken: ""
+  sessionId: ""
+  eventId: d4eb8050-e984-4f43-9162-192d14b90031
+auth:
+  - id: 77143630-5e1a-4a53-a8da-126e8fecb4d1
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{accessToken}}"

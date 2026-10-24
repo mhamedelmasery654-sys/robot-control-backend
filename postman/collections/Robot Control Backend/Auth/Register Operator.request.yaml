@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "{{email}}",
+      "password": "{{password}}"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) { const body = pm.response.json(); pm.environment.set('accessToken', body.data.token); }
+      pm.test('Registered or already exists', () => pm.expect([201, 409]).to.include(pm.response.code));
+    language: text/javascript
+order: 1000

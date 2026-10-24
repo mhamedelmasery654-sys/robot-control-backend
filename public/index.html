@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Robot Control Backend</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div class="brand-mark">RC</div>
+        <div><p class="eyebrow">TASK 8 · BACKEND SERVICE</p><h1>Robot Control API</h1></div>
+        <span id="overall" class="badge pending">Checking</span>
+      </header>
+      <section class="intro">
+        <p class="eyebrow">EVENTS & RESULTS ONLY</p>
+        <h2>Standalone logging service</h2>
+        <p>This service stores authenticated control-session events and validated command results. It does not send commands to a robot.</p>
+      </section>
+      <section class="cards" aria-label="Service status">
+        <article class="card"><span class="label">API PROCESS</span><strong id="live">Checking…</strong><small>GET /api/v1/health/live</small></article>
+        <article class="card"><span class="label">DATABASES</span><strong id="ready">Checking…</strong><small>PostgreSQL + MongoDB</small></article>
+        <article class="card"><span class="label">REAL-TIME INGEST</span><strong>WebSocket</strong><small>/api/v1/ws</small></article>
+      </section>
+      <section class="panel">
+        <h3>Connection workflow</h3>
+        <ol><li>Create or sign in to an operator account.</li><li>Open a control session and retain its ID.</li><li>Post validated events through REST or the authenticated WebSocket.</li></ol>
+        <p class="note">Audio bytes, speech transcripts, passwords, and authentication tokens are not stored in event records.</p>
+      </section>
+        <footer>API documentation: <a href="/openapi.yaml">OpenAPI spec</a> · Postman collection is in the project folder.</footer>
+    </main>
+  </body>
+</html>

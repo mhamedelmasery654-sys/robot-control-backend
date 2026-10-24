@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+coverage/
+*.log
+.runtime/
+dist/
+Thumbs.db
+Desktop.ini

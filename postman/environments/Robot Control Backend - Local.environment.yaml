@@ -1,0 +1,14 @@
+name: Robot Control Backend - Local
+values:
+  - key: baseUrl
+    value: 'http://127.0.0.1:8787/api/v1'
+  - key: email
+    value: operator@example.com
+  - key: password
+    value: change-this-password-123
+  - key: accessToken
+    value: ''
+  - key: sessionId
+    value: ''
+  - key: eventId
+    value: d4eb8050-e984-4f43-9162-192d14b90031

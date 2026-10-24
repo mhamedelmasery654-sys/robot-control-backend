@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/sessions/{{sessionId}}/events"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "source": "robot_bridge",
+      "category": "command_result",
+      "eventName": "command.completed",
+      "outcome": "completed",
+      "data": { "commandType": "drive", "status": "executed", "durationMs": 350 }
+    }
+order: 3000
