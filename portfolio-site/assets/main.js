@@ -75,7 +75,7 @@ if ('IntersectionObserver' in window) {
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 /* 3D GLB stages: slow idle motion, drag orbit, wheel zoom, and pause/reset controls. */
-function createStage({ canvas, modelUrl, loading, resetButton, pauseButton, scale = 2.2, yaw = 0, tilt = 0.06 }) {
+function createStage({ canvas, modelUrl, loading, resetButton, pauseButton, scale = 2.2, modelLift = 0.08, yaw = 0, tilt = 0.06 }) {
   if (!canvas) return null;
   if (!window.WebGLRenderingContext) {
     loading?.classList.add('loaded');
@@ -99,7 +99,9 @@ function createStage({ canvas, modelUrl, loading, resetButton, pauseButton, scal
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.05, 100);
-  camera.position.set(0, 1.15, 5.6);
+  const cameraTargetY = 0.12;
+  camera.position.set(0, 1.15, 5.8);
+  camera.lookAt(0, cameraTargetY, 0);
   const ambient = new THREE.HemisphereLight(0xbfe7ff, 0x101020, 2.05);
   scene.add(ambient);
   const key = new THREE.DirectionalLight(0xffffff, 3.2);
@@ -150,6 +152,7 @@ function createStage({ canvas, modelUrl, loading, resetButton, pauseButton, scal
     const maxSize = Math.max(size.x, size.y, size.z) || 1;
     model.scale.setScalar(scale / maxSize);
     model.position.sub(center.multiplyScalar(scale / maxSize));
+    model.position.y += scale * modelLift;
     model.rotation.x = tilt;
     model.traverse((child) => {
       if (!child.isMesh) return;
@@ -180,7 +183,8 @@ function createStage({ canvas, modelUrl, loading, resetButton, pauseButton, scal
     camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
     const compact = rect.width < 560;
-    camera.position.z = (compact ? 6.1 : 5.3) / zoom;
+    camera.position.z = (compact ? 6.45 : 5.8) / zoom;
+    camera.lookAt(0, cameraTargetY, 0);
   }
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(canvas.parentElement);
@@ -251,7 +255,8 @@ createStage({
   loading: document.querySelector('#robot-loading'),
   resetButton: document.querySelector('#model-reset'),
   pauseButton: document.querySelector('#model-pause'),
-  scale: 2.85,
+  scale: 2.75,
+  modelLift: 0.08,
   yaw: -0.35,
   tilt: 0.08,
 });
@@ -260,6 +265,7 @@ createStage({
   canvas: document.querySelector('#detail-canvas'),
   modelUrl: './public/models/controller2.glb',
   scale: 2.15,
+  modelLift: 0.08,
   yaw: -0.32,
   tilt: -0.13,
 });

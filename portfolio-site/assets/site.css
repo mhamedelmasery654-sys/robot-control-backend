@@ -44,3 +44,8 @@ html[dir="rtl"] .hero-copy{left:auto;right:var(--gutter);text-align:right}.rtl .
 @media(max-width:430px){.robot-orbit{right:2%;bottom:7%;width:42vw;height:42vw;min-height:185px;max-height:205px}.orbit-label{right:4%;bottom:1%}}
 .copy-veil{bottom:0;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 91%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 91%,transparent 100%)}
 @media(max-width:720px){.copy-veil{bottom:0;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 90%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 90%,transparent 100%)}}
+
+/* Raise rendered subjects and give both interactive GLB models more room in frame. */
+.robot-orbit{bottom:12%}
+.project-visual>img,.model-fallback{object-position:center 56%}
+@media(max-width:720px){.robot-orbit{bottom:11%}}
