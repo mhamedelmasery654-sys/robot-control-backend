@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030817">
+  <meta name="description" content="Khaled Elmasry connects electrical engineering, embedded hardware, backend development and 3D design to build practical systems.">
+  <title>Khaled Elmasry — Electrical & Embedded Systems</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preload" as="image" href="./public/media/hero-reference.png">
+  <link rel="stylesheet" href="./assets/site.css">
+  <script type="importmap">{"imports":{"three":"./public/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <canvas id="energy-field" aria-hidden="true"></canvas>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#top" aria-label="Khaled Elmasry home"><span class="brand-mark">KE</span><span class="brand-name">MY PORTFOLIO</span></a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><i></i><i></i><i></i></button>
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="#about" data-en="ABOUT ME" data-ar="عني">ABOUT ME</a>
+      <a href="#education" data-en="EDUCATION" data-ar="التعليم">EDUCATION</a>
+      <a href="#journey" data-en="JOURNEY" data-ar="المسيرة">JOURNEY</a>
+      <a href="#projects" data-en="PROJECTS" data-ar="المشاريع">PROJECTS</a>
+      <a href="#services" data-en="SERVICES" data-ar="الخدمات">SERVICES</a>
+      <a class="nav-contact" href="#contact" data-en="CONTACT" data-ar="تواصل">CONTACT</a>
+    </nav>
+    <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch language">عربي</button>
+    <span class="nav-energy" aria-hidden="true"><i></i></span>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-photo" role="img" aria-label="Khaled in a blue and gold illuminated engineering workspace"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="copy-veil" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span data-en="HELLO, I'M" data-ar="مرحبًا، أنا">HELLO, I'M</span><b></b></p>
+        <h1 id="hero-title"><span>Khaled</span><strong>Elmasry</strong></h1>
+        <p class="hero-role" data-en="ELECTRICAL POWER & EMBEDDED SYSTEMS" data-ar="هندسة القوى والأنظمة المدمجة">ELECTRICAL POWER & EMBEDDED SYSTEMS</p>
+        <p class="hero-intro" data-en="I connect electrical engineering, embedded hardware and backend development to turn ideas into practical, well-documented systems." data-ar="أربط بين هندسة القوى الكهربائية والأنظمة المدمجة وتطوير البرمجيات الخلفية لتحويل الأفكار إلى أنظمة عملية وموثقة.">I connect electrical engineering, embedded hardware and backend development to turn ideas into practical, well-documented systems.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects" data-en="EXPLORE PROJECTS" data-ar="استكشف المشاريع">EXPLORE PROJECTS <span>↗</span></a>
+          <a class="button button-quiet" href="./public/media/Khaled-Elmasry-CV.pdf" target="_blank" rel="noreferrer" data-en="VIEW MY CV" data-ar="عرض السيرة الذاتية">VIEW MY CV <span>↓</span></a>
+        </div>
+        <div class="hero-status"><span class="status-dot"></span><span data-en="ENGINEERING IDEAS INTO REAL SYSTEMS" data-ar="نحوّل الأفكار الهندسية إلى أنظمة حقيقية">ENGINEERING IDEAS INTO REAL SYSTEMS</span></div>
+      </div>
+
+      <div class="hero-hud hud-top" aria-hidden="true"><span>SYS / 036</span><i></i><span>LIVE SIGNAL</span></div>
+      <div class="hero-hud hud-bottom" aria-hidden="true"><span class="hud-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>EMBEDDED · ELECTRICAL · SOFTWARE</span></div>
+      <div class="screen-scan screen-main" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="robot-orbit" aria-label="Interactive animated 3D robot model. Drag to rotate; scroll to zoom.">
+        <canvas id="robot-canvas"></canvas>
+        <div class="robot-loading" id="robot-loading"><span class="loader-ring"></span><span>LOADING 3D SYSTEM</span></div>
+        <div class="orbit-label"><span class="orbit-dot"></span><span data-en="3D MODEL · DRAG TO ROTATE" data-ar="مجسم ثلاثي الأبعاد · اسحب للتدوير">3D MODEL · DRAG TO ROTATE</span></div>
+        <div class="orbit-controls"><button id="model-reset" type="button" aria-label="Reset 3D view">↺</button><button id="model-pause" type="button" aria-label="Pause 3D motion">Ⅱ</button></div>
+      </div>
+      <a class="hero-scroll" href="#about"><span data-en="SCROLL TO EXPLORE" data-ar="مرر لاستكشاف الموقع">SCROLL TO EXPLORE</span><i></i></a>
+      <div class="hero-edge-light" aria-hidden="true"></div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="section-index reveal"><span>01</span><i></i><span data-en="THE CONNECTION" data-ar="حلقة الوصل">THE CONNECTION</span></div>
+      <div class="about-grid">
+        <div class="about-heading reveal"><p class="eyebrow">ABOUT / KHALED</p><h2 data-en="One idea.<br>Four engineering lenses." data-ar="فكرة واحدة.<br>أربع زوايا هندسية.">One idea.<br>Four engineering lenses.</h2></div>
+        <div class="about-copy reveal">
+          <p class="lead" data-en="I help individuals and startups bridge electrical engineering, embedded hardware and backend development — turning early ideas into practical systems, automated 3D designs and data-informed solutions." data-ar="أساعد الأفراد والشركات الناشئة على ربط هندسة القوى بالأنظمة المدمجة وتطوير البرمجيات الخلفية، وتحويل الأفكار الأولية إلى أنظمة عملية وتصميمات ثلاثية الأبعاد وحلول تدعمها البيانات.">I help individuals and startups bridge electrical engineering, embedded hardware and backend development — turning early ideas into practical systems, automated 3D designs and data-informed solutions.</p>
+          <p class="muted" data-en="I am an Electrical Engineering student at Port Said University, focused on Power and Machines. My portfolio brings together academic work, prototypes and 3D visualizations; each case study makes its scope and verification status clear." data-ar="أنا طالب بكلية الهندسة في جامعة بورسعيد، تخصص القوى والآلات. يجمع هذا المعرض بين مشروعات أكاديمية ونماذج أولية وتصميمات ثلاثية الأبعاد، مع توضيح نطاق كل مشروع وحالة التحقق منه.">I am an Electrical Engineering student at Port Said University, focused on Power and Machines. My portfolio brings together academic work, prototypes and 3D visualizations; each case study makes its scope and verification status clear.</p>
+          <div class="discipline-rail"><span>ELECTRICAL</span><b></b><span>EMBEDDED</span><b></b><span>BACKEND</span><b></b><span>3D</span></div>
+        </div>
+      </div>
+      <div class="signal-cards">
+        <article class="signal-card reveal"><span class="card-number">01 / POWER</span><div class="card-icon icon-grid">ϟ</div><h3 data-en="Electrical systems" data-ar="الأنظمة الكهربائية">Electrical systems</h3><p data-en="Power and machines, system modeling and engineering visualization." data-ar="القوى والآلات، نمذجة الأنظمة والتصور الهندسي.">Power and machines, system modeling and engineering visualization.</p><span class="card-line"></span></article>
+        <article class="signal-card reveal"><span class="card-number">02 / DEVICE</span><div class="card-icon icon-chip">⌘</div><h3 data-en="Embedded hardware" data-ar="الأنظمة المدمجة">Embedded hardware</h3><p data-en="Microcontrollers, sensors and control experiments built around real devices." data-ar="متحكمات دقيقة وحساسات وتجارب تحكم مرتبطة بالأجهزة.">Microcontrollers, sensors and control experiments built around real devices.</p><span class="card-line"></span></article>
+        <article class="signal-card reveal"><span class="card-number">03 / DATA</span><div class="card-icon icon-code">{ }</div><h3 data-en="Backend software" data-ar="البرمجيات الخلفية">Backend software</h3><p data-en="APIs, databases and interfaces that connect hardware to usable tools." data-ar="واجهات API وقواعد بيانات وأدوات تربط الأجهزة بالبرمجيات.">APIs, databases and interfaces that connect hardware to usable tools.</p><span class="card-line"></span></article>
+        <article class="signal-card reveal"><span class="card-number">04 / FORM</span><div class="card-icon icon-cube">◇</div><h3 data-en="3D engineering" data-ar="التصميم الهندسي ثلاثي الأبعاد">3D engineering</h3><p data-en="Blender models and visual workflows that make complex systems easier to see." data-ar="نماذج Blender ومسارات بصرية تجعل الأنظمة المعقدة أسهل للفهم.">Blender models and visual workflows that make complex systems easier to see.</p><span class="card-line"></span></article>
+      </div>
+    </section>
+
+    <section class="section skills-section" id="skills">
+      <div class="section-index reveal"><span>02</span><i></i><span data-en="THE TOOLKIT" data-ar="الأدوات">THE TOOLKIT</span></div>
+      <div class="section-heading reveal"><p class="eyebrow">HARDWARE × SOFTWARE</p><h2 data-en="Built across<br><em>connected disciplines.</em>" data-ar="خبرة عبر<br><em>تخصصات مترابطة.</em>">Built across<br><em>connected disciplines.</em></h2><p data-en="A working toolkit drawn from my CV, training and project files." data-ar="مجموعة أدوات مستندة إلى سيرتي الذاتية وتدريبي وملفات مشاريعي.">A working toolkit drawn from my CV, training and project files.</p></div>
+      <div class="skill-matrix">
+        <article class="skill-group reveal"><div class="skill-head"><span class="skill-symbol">ϟ</span><h3 data-en="Electrical & power" data-ar="الكهرباء والقوى">Electrical & power</h3></div><div class="skill-tags"><span>ETAP</span><span>MATLAB / Simulink</span><span>AutoCAD Electrical</span><span>Revit MEP</span><span>CADe_SIMU</span></div><div class="skill-wave"><i></i></div></article>
+        <article class="skill-group reveal"><div class="skill-head"><span class="skill-symbol">▦</span><h3 data-en="Embedded & control" data-ar="الأنظمة المدمجة والتحكم">Embedded & control</h3></div><div class="skill-tags"><span>Arduino</span><span>ESP32</span><span>C++</span><span>PlatformIO</span><span>MPU6050</span><span>HC-SR04</span><span>L298</span></div><div class="skill-wave"><i></i></div></article>
+        <article class="skill-group reveal"><div class="skill-head"><span class="skill-symbol">{ }</span><h3 data-en="Backend & data" data-ar="البرمجيات والبيانات">Backend & data</h3></div><div class="skill-tags"><span>Node.js</span><span>Express</span><span>REST APIs</span><span>JWT</span><span>TypeORM</span><span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span></div><div class="skill-wave"><i></i></div></article>
+        <article class="skill-group reveal"><div class="skill-head"><span class="skill-symbol">◇</span><h3 data-en="3D, web & workflow" data-ar="التصميم والويب وسير العمل">3D, web & workflow</h3></div><div class="skill-tags"><span>Blender</span><span>HTML / CSS / JS</span><span>Three.js</span><span>Git / GitHub</span><span>Excel</span><span>LaTeX</span></div><div class="skill-wave"><i></i></div></article>
+      </div>
+    </section>
+
+    <section class="section education-section" id="education">
+      <div class="section-index reveal"><span>03</span><i></i><span data-en="THE FOUNDATION" data-ar="الأساس العلمي">THE FOUNDATION</span></div>
+      <div class="education-layout">
+        <div class="section-heading reveal"><p class="eyebrow">EDUCATION / TRAINING</p><h2 data-en="Learning by<br><em>building.</em>" data-ar="أتعلم من خلال<br><em>التطبيق.</em>">Learning by<br><em>building.</em></h2></div>
+        <div class="timeline">
+          <article class="timeline-item reveal"><span class="timeline-date">CURRENT</span><span class="timeline-node"></span><div><h3 data-en="Electrical Engineering · Power & Machines" data-ar="هندسة كهربائية · قوى وآلات">Electrical Engineering · Power & Machines</h3><p data-en="Faculty of Engineering, Port Said University · B.Sc. student" data-ar="كلية الهندسة، جامعة بورسعيد · طالب بكالوريوس">Faculty of Engineering, Port Said University · B.Sc. student</p></div></article>
+          <article class="timeline-item reveal"><span class="timeline-date">2026</span><span class="timeline-node gold"></span><div><h3 data-en="Web Development Diploma" data-ar="دبلومة تطوير الويب">Web Development Diploma</h3><p data-en="Creativa Hub, Port Said · web fundamentals and development" data-ar="مركز إبداع مصر الرقمية، بورسعيد · أساسيات وتطوير الويب">Creativa Hub, Port Said · web fundamentals and development</p></div></article>
+          <article class="timeline-item reveal"><span class="timeline-date">TRAINING</span><span class="timeline-node red"></span><div><h3 data-en="ITI & Suez Canal Authority" data-ar="معهد تكنولوجيا المعلومات وهيئة قناة السويس">ITI & Suez Canal Authority</h3><p data-en="Python, database management, IoT applications and summer training." data-ar="Python وإدارة قواعد البيانات وتطبيقات إنترنت الأشياء والتدريب الصيفي.">Python, database management, IoT applications and summer training.</p></div></article>
+          <article class="timeline-item reveal"><span class="timeline-date">ONGOING</span><span class="timeline-node"></span><div><h3 data-en="Independent engineering practice" data-ar="تطوير ذاتي وممارسة هندسية">Independent engineering practice</h3><p data-en="Blender, electronics, backend development and technical documentation." data-ar="Blender والإلكترونيات وتطوير البرمجيات الخلفية والتوثيق التقني.">Blender, electronics, backend development and technical documentation.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-section" id="services">
+      <div class="section-index reveal"><span>04</span><i></i><span data-en="WAYS TO COLLABORATE" data-ar="مجالات التعاون">WAYS TO COLLABORATE</span></div>
+      <div class="services-heading reveal"><div class="section-heading"><p class="eyebrow">FOCUSED ENGINEERING SUPPORT</p><h2 data-en="A clear path<br>from idea to <em>prototype.</em>" data-ar="خطوة واضحة<br>من الفكرة إلى <em>النموذج.</em>">A clear path<br>from idea to <em>prototype.</em></h2></div><p class="projects-intro" data-en="Three areas where my coursework, training and project practice come together. Scope and deliverables are agreed to fit each project." data-ar="ثلاثة مجالات يلتقي فيها تعليمي وتدريبي وممارستي العملية. يتم تحديد نطاق العمل ومخرجاته بما يناسب كل مشروع.">Three areas where my coursework, training and project practice come together. Scope and deliverables are agreed to fit each project.</p></div>
+      <div class="service-grid">
+        <article class="service-card reveal"><span class="service-id">S / 01</span><div class="service-glyph">ϟ</div><h3 data-en="Embedded prototypes" data-ar="نماذج الأنظمة المدمجة">Embedded prototypes</h3><p data-en="Arduino and ESP32 foundations, sensor integration, firmware structure and device-to-software experiments." data-ar="أساسيات Arduino وESP32 ودمج الحساسات وبنية البرمجيات الثابتة وتجارب ربط الأجهزة بالبرمجيات.">Arduino and ESP32 foundations, sensor integration, firmware structure and device-to-software experiments.</p><span class="service-link">ARDUINO · ESP32 · C++</span></article>
+        <article class="service-card reveal"><span class="service-id">S / 02</span><div class="service-glyph">{ }</div><h3 data-en="Backend & data tools" data-ar="البرمجيات الخلفية وأدوات البيانات">Backend & data tools</h3><p data-en="REST API foundations, database-backed workflows and lightweight interfaces for connected systems." data-ar="بناء واجهات REST API ومسارات عمل تعتمد على قواعد البيانات وواجهات خفيفة للأنظمة المتصلة.">REST API foundations, database-backed workflows and lightweight interfaces for connected systems.</p><span class="service-link">NODE.JS · SQL · API</span></article>
+        <article class="service-card reveal"><span class="service-id">S / 03</span><div class="service-glyph">◇</div><h3 data-en="Engineering visualization" data-ar="التصور الهندسي">Engineering visualization</h3><p data-en="Blender models and process visuals that help communicate a system's layout, connections and concept." data-ar="نماذج Blender وتصوير للمسارات يساعد على شرح ترتيب النظام وروابطه وفكرته.">Blender models and process visuals that help communicate a system's layout, connections and concept.</p><span class="service-link">BLENDER · 3D · DOCUMENTATION</span></article>
+      </div>
+      <p class="services-note reveal"><span>↗</span><span data-en="Work is scoped honestly: prototypes and visual models are labeled clearly, and engineering validation is discussed before delivery." data-ar="نحدد نطاق العمل بوضوح: نميز النماذج الأولية والتصورات البصرية، ونتفق على التحقق الهندسي المطلوب قبل التسليم.">Work is scoped honestly: prototypes and visual models are labeled clearly, and engineering validation is discussed before delivery.</span></p>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-index reveal"><span>05</span><i></i><span data-en="SELECTED WORK" data-ar="أعمال مختارة">SELECTED WORK</span></div>
+      <div class="projects-title-row reveal"><div class="section-heading"><p class="eyebrow">IDEA → MODEL → SYSTEM</p><h2 data-en="Projects with<br><em>real context.</em>" data-ar="مشاريع ضمن<br><em>سياق واضح.</em>">Projects with<br><em>real context.</em></h2></div><p class="projects-intro" data-en="A curated selection of engineering, embedded and 3D work. Prototype status and project boundaries are stated openly." data-ar="مجموعة مختارة من أعمال الهندسة والأنظمة المدمجة والتصميم ثلاثي الأبعاد، مع توضيح حالة النماذج وحدودها.">A curated selection of engineering, embedded and 3D work. Prototype status and project boundaries are stated openly.</p></div>
+
+      <article class="project-feature reveal" id="robot-project">
+        <div class="project-visual robot-visual"><img src="./public/media/robot-showroom-v3.png" alt="Blender visualization connecting a laptop, game controller and multi-level robot"><div class="visual-grid"></div><span class="visual-index">01 / ROBOT MOTION CONTROL</span><div class="visual-pulse"><i></i><i></i><i></i></div></div>
+        <div class="project-content"><div class="project-kicker"><span class="project-dot cyan"></span><span data-en="EMBEDDED · WEB · 3D" data-ar="أنظمة مدمجة · ويب · تصميم ثلاثي الأبعاد">EMBEDDED · WEB · 3D</span><span class="project-state" data-en="PROTOTYPE / INTEGRATION IN PROGRESS" data-ar="نموذج أولي / التكامل قيد التحقق">PROTOTYPE / INTEGRATION IN PROGRESS</span></div><h3 data-en="Robot Motion Control<br>& Gamepad Calibration" data-ar="التحكم بحركة الروبوت<br>ومعايرة يد التحكم">Robot Motion Control<br>& Gamepad Calibration</h3><p data-en="A prototype joining a controller-calibration utility, a browser control studio, Python tooling and Arduino/ESP32 firmware with Blender and GLB visual models." data-ar="نموذج أولي يجمع أداة لمعايرة يد التحكم وواجهة تحكم عبر المتصفح وأدوات Python وبرمجيات Arduino وESP32 مع نماذج Blender وGLB.">A prototype joining a controller-calibration utility, a browser control studio, Python tooling and Arduino/ESP32 firmware with Blender and GLB visual models.</p><div class="project-tags"><span>Arduino / ESP32</span><span>Python</span><span>WebSocket</span><span>Three.js</span><span>Blender</span></div><div class="project-actions"><a class="text-link" href="https://github.com/khaledElmasery?tab=repositories" target="_blank" rel="noreferrer"><span data-en="BROWSE PUBLIC GITHUB WORK" data-ar="تصفح مشاريعي العامة على GitHub">BROWSE PUBLIC GITHUB WORK</span> ↗</a><a class="text-link gold-link" href="#interactive-model"><span data-en="INTERACT WITH 3D MODEL" data-ar="استكشف النموذج ثلاثي الأبعاد">INTERACT WITH 3D MODEL</span> ↓</a></div><small class="project-caveat" data-en="The 3D scene is a visual model. Full physical robot motion and ESP32 Bluetooth control are not claimed as verified." data-ar="المشهد ثلاثي الأبعاد نموذج بصري؛ لا أدّعي التحقق من حركة الروبوت الفعلية أو تحكم Bluetooth عبر ESP32.">The 3D scene is a visual model. Full physical robot motion and ESP32 Bluetooth control are not claimed as verified.</small></div>
+      </article>
+
+      <article class="project-feature factory-feature reveal">
+        <div class="project-visual factory-visual"><img src="./public/media/factory-ev036.png" alt="Conceptual Blender view of an olive oil processing line through filtering"><div class="visual-grid"></div><span class="visual-index">02 / EV-036 · OLIVE OIL LINE</span><div class="factory-flow"><span></span><span></span><span></span><span></span><span></span></div></div>
+        <div class="project-content"><div class="project-kicker"><span class="project-dot gold"></span><span data-en="INDUSTRIAL 3D · BLENDER" data-ar="نمذجة صناعية · Blender">INDUSTRIAL 3D · BLENDER</span><span class="project-state gold-state" data-en="CONCEPT MODEL" data-ar="نموذج تصوري">CONCEPT MODEL</span></div><h3 data-en="Olive Oil Processing<br>Line · EV-036" data-ar="خط استخلاص زيت الزيتون<br>EV-036">Olive Oil Processing<br>Line · EV-036</h3><p data-en="A connected visual layout from olive receiving and washing through extraction, settling and filtration to the filtered-oil tank. Product, service and waste paths are distinguished." data-ar="تصور بصري مترابط يبدأ من استقبال الزيتون وغسله، مرورًا بالاستخلاص والترسيب والترشيح، وصولًا إلى خزان الزيت المرشح مع تمييز مسارات المنتج والخدمات والمخلفات.">A connected visual layout from olive receiving and washing through extraction, settling and filtration to the filtered-oil tank. Product, service and waste paths are distinguished.</p><div class="project-tags"><span>Blender 5.2</span><span>Process visualization</span><span>Equipment layout</span></div><div class="project-actions"><a class="text-link" href="./public/models/olive-line-ev036.blend" download><span data-en="DOWNLOAD BLENDER SCENE" data-ar="تحميل ملف Blender">DOWNLOAD BLENDER SCENE</span> ↓</a><a class="text-link gold-link" href="./public/media/factory-flow-ev036.png" target="_blank" rel="noreferrer"><span data-en="VIEW PROCESS MAP" data-ar="عرض خريطة المسار">VIEW PROCESS MAP</span> ↗</a></div><small class="project-caveat" data-en="Concept visualization only — not to scale and not a manufacturing or execution drawing. Commercial permission and contribution credits must be confirmed before public release." data-ar="تصور مفاهيمي فقط، غير مقياسي وليس رسم تصنيع أو تنفيذ. يجب تأكيد إذن النشر ونسبة المساهمة قبل الإتاحة العامة.">Concept visualization only — not to scale and not a manufacturing or execution drawing. Commercial permission and contribution credits must be confirmed before public release.</small></div>
+      </article>
+
+      <article class="project-feature model-feature reveal" id="interactive-model">
+        <div class="project-content model-copy"><div class="project-kicker"><span class="project-dot red"></span><span data-en="INTERACTIVE 3D VIEWER" data-ar="عارض ثلاثي الأبعاد تفاعلي">INTERACTIVE 3D VIEWER</span><span class="project-state" data-en="GLB / BLENDER SOURCE" data-ar="GLB / مصدر Blender">GLB / BLENDER SOURCE</span></div><h3 data-en="A model you<br>can explore." data-ar="نموذج يمكنك<br>استكشافه بنفسك.">A model you<br>can explore.</h3><p data-en="Drag the model to rotate it, use the wheel to zoom, or let the lighting and motion reveal the details. The scene is loaded from the project's actual GLB asset." data-ar="اسحب النموذج لتدويره واستخدم عجلة الفأرة للتقريب، أو اترك الحركة والإضاءة تكشف التفاصيل. المشهد محمّل من ملف GLB الفعلي للمشروع.">Drag the model to rotate it, use the wheel to zoom, or let the lighting and motion reveal the details. The scene is loaded from the project's actual GLB asset.</p><div class="project-actions"><a class="text-link" href="./public/models/robot-v2.glb" download><span data-en="DOWNLOAD ROBOT MODEL" data-ar="تحميل نموذج الروبوت">DOWNLOAD ROBOT MODEL</span> ↓</a><a class="text-link gold-link" href="./public/models/controller2.glb" download><span data-en="DOWNLOAD CONTROLLER MODEL" data-ar="تحميل نموذج يد التحكم">DOWNLOAD CONTROLLER MODEL</span> ↓</a></div></div>
+        <div class="model-stage"><img class="model-fallback" src="./public/media/controller-detail-v3.png" alt=""><canvas id="detail-canvas"></canvas><div class="model-screen"><div class="screen-chrome"><span></span><span></span><span></span></div><div class="screen-lines"><i></i><i></i><i></i><i></i><i></i><b></b></div><div class="screen-sweep"></div></div><div class="stage-halo"></div><div class="stage-label"><span class="status-dot"></span><span>CONTROLLER V2 · INTERACTIVE</span><span class="stage-size">GLB / 4.1 MB</span></div><div class="stage-caption" data-en="Drag to orbit · Scroll to zoom" data-ar="اسحب للتدوير · مرر للتقريب">Drag to orbit · Scroll to zoom</div></div>
+      </article>
+
+      <div class="project-note reveal"><span class="note-icon">i</span><p data-en="Additional CV projects include a multi-sensor robot car, a self-balancing robot and an APFC study. They can be added as full case studies when their source files and results are ready to share." data-ar="تتضمن السيرة أيضًا سيارة روبوت متعددة الحساسات وروبوتًا ذاتي التوازن ودراسة لتحسين معامل القدرة. يمكن إضافتها كدراسات حالة عند تجهيز ملفاتها ونتائجها للمشاركة.">Additional CV projects include a multi-sensor robot car, a self-balancing robot and an APFC study. They can be added as full case studies when their source files and results are ready to share.</p></div>
+    </section>
+
+    <section class="section journey-section" id="journey">
+      <div class="section-index reveal"><span>06</span><i></i><span data-en="WHAT'S NEXT" data-ar="الخطوة التالية">WHAT'S NEXT</span></div>
+      <div class="journey-panel reveal"><div><p class="eyebrow">NEXT / COLLABORATION</p><h2 data-en="From a rough idea<br>to a working system." data-ar="من فكرة أولية<br>إلى نظام يعمل.">From a rough idea<br>to a working system.</h2><p class="muted" data-en="Open to learning, internships and collaboration across electrical systems, embedded hardware and software." data-ar="منفتح على التعلم والتدريب والتعاون في الأنظمة الكهربائية والأنظمة المدمجة والبرمجيات.">Open to learning, internships and collaboration across electrical systems, embedded hardware and software.</p></div><div class="journey-mark" aria-hidden="true"><div class="journey-ring ring-a"></div><div class="journey-ring ring-b"></div><div class="journey-core">KE<span>+</span></div><i class="journey-spark"></i></div></div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="section-index reveal"><span>07</span><i></i><span data-en="START A CONVERSATION" data-ar="لنتحدث">START A CONVERSATION</span></div>
+      <div class="contact-grid"><div class="reveal"><p class="eyebrow">CONTACT / KHALED</p><h2 data-en="Have a system<br>to connect?" data-ar="هل لديك نظام<br>تريد ربط أجزائه؟">Have a system<br>to connect?</h2><p class="muted" data-en="For engineering opportunities, project collaboration or a conversation about an idea." data-ar="للفرص الهندسية أو التعاون في مشروع أو مناقشة فكرة.">For engineering opportunities, project collaboration or a conversation about an idea.</p></div><div class="contact-links reveal"><a href="mailto:elmaserykhaled040@gmail.com" class="contact-link"><span>EMAIL</span><strong>elmaserykhaled040@gmail.com</strong><i>↗</i></a><a href="https://github.com/khaledElmasery" target="_blank" rel="noreferrer" class="contact-link"><span>GITHUB</span><strong>github.com/khaledElmasery</strong><i>↗</i></a><a href="./public/media/Khaled-Elmasry-CV.pdf" target="_blank" rel="noreferrer" class="contact-link"><span>CURRICULUM VITAE</span><strong data-en="Open the latest CV" data-ar="افتح السيرة الذاتية">Open the latest CV</strong><i>↓</i></a></div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><a href="#top" class="footer-brand">KE<span> / KHALED ELMASRY</span></a><p>© <span id="year">2026</span> · <span data-en="BUILT AT THE INTERSECTION OF ENGINEERING & SOFTWARE" data-ar="عند تقاطع الهندسة والبرمجيات">BUILT AT THE INTERSECTION OF ENGINEERING & SOFTWARE</span></p><a href="#top" class="back-top" aria-label="Back to top">↑</a></footer>
+
+  <script type="module" src="./assets/main.js"></script>
+</body>
+</html>
