@@ -3,12 +3,25 @@
 const { WebSocketServer } = require('ws');
 const { randomUUID } = require('node:crypto');
 const { eventSchema } = require('./validators/event.validator');
+const { attachDemoSimulator } = require('./demoSimulator');
 
 function attachWebSocketServer(server, { authService, userRepository, sessionService, eventService, publicOrigins }) {
   const wss = new WebSocketServer({ noServer: true, maxPayload: 16 * 1024, perMessageDeflate: false });
+  const demoWss = new WebSocketServer({ noServer: true, maxPayload: 2 * 1024, perMessageDeflate: false });
+  attachDemoSimulator(demoWss);
 
   server.on('upgrade', (request, socket, head) => {
     const url = new URL(request.url, 'http://localhost');
+    if (url.pathname === '/api/v1/demo/ws') {
+      const origin = request.headers.origin;
+      if (!origin || !publicOrigins.includes(origin)) {
+        socket.write('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');
+        socket.destroy();
+        return;
+      }
+      demoWss.handleUpgrade(request, socket, head, (websocket) => demoWss.emit('connection', websocket, request));
+      return;
+    }
     if (url.pathname !== '/api/v1/ws') {
       socket.write('HTTP/1.1 404 Not Found\r\nConnection: close\r\n\r\n');
       socket.destroy();
@@ -70,6 +83,7 @@ function attachWebSocketServer(server, { authService, userRepository, sessionSer
     websocket.on('error', () => clearTimeout(authTimeout));
   });
 
+  wss.demoServer = demoWss;
   return wss;
 }
 
@@ -78,3 +92,4 @@ function sendError(websocket, code, message) {
 }
 
 module.exports = { attachWebSocketServer };
+

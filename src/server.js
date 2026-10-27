@@ -48,7 +48,7 @@ async function start() {
     server.once('error', reject);
     server.listen(config.PORT, config.HOST, resolve);
   });
-  process.stdout.write(JSON.stringify({ level: 'info', message: 'robot-control-backend listening', host: config.HOST, port: config.PORT, websocketPath: '/api/v1/ws' }) + '\n');
+  process.stdout.write(JSON.stringify({ level: 'info', message: 'robot-control-backend listening', host: config.HOST, port: config.PORT, websocketPaths: ['/api/v1/ws', '/api/v1/demo/ws'] }) + '\n');
 
   let shuttingDown = false;
   const shutdown = async (signal) => {
@@ -57,6 +57,9 @@ async function start() {
     process.stdout.write(JSON.stringify({ level: 'info', message: 'shutdown started', signal }) + '\n');
     const forceTimer = setTimeout(() => process.exit(1), 10000).unref();
     for (const client of websocketServer.clients) client.close(1001, 'Server shutting down');
+    for (const client of websocketServer.demoServer.clients) client.close(1001, 'Server shutting down');
+    websocketServer.close();
+    websocketServer.demoServer.close();
     server.close(async () => {
       clearTimeout(forceTimer);
       await Promise.allSettled([mongoose.disconnect(), dataSource.destroy()]);
@@ -83,3 +86,4 @@ if (require.main === module) {
 }
 
 module.exports = { start };
+

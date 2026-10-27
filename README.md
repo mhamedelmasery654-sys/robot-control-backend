@@ -87,8 +87,11 @@ Main routes:
 | GET | `/admin/users` | Admin-only user list |
 | GET | `/admin/audit` | Admin-only audit history |
 | WebSocket | `/api/v1/ws` | Authenticated event ingestion |
+| WebSocket | `/api/v1/demo/ws` | Public, origin-checked visual portfolio simulation with a FIFO two-minute turn queue |
 
 The WebSocket acknowledges an event after MongoDB accepts it. It is for recording events; it does not broadcast motor or actuator commands.
+
+The portfolio demo route is separate from that authenticated event stream. It synchronizes only the browser-rendered robot pose, simulated lights, selected controller and laptop image; it never sends commands to physical hardware. Its in-memory queue is shared by browsers connected to this single Render instance. See [the demo protocol](postman/documents/Portfolio%20Demo%20WebSocket.md).
 
 ## Postman and API Contract
 
@@ -97,6 +100,7 @@ The WebSocket acknowledges an event after MongoDB accepts it. It is for recordin
 - [Local Postman environment](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/postman/environments/Robot%20Control%20Backend%20-%20Local.environment.yaml)
 - [Deployment guide](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/DEPLOYMENT.md)
 - [Execution report](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/README-execution-report.md)
+- [Portfolio robot simulator protocol](https://github.com/mhamedelmasery654-sys/robot-control-backend/blob/main/postman/documents/Portfolio%20Demo%20WebSocket.md)
 
 These files are stored in this repository; access follows the repository's visibility setting.
 
@@ -158,4 +162,5 @@ The project execution report records these local checks:
 ## Project Scope
 
 This is a backend logging and session API. It is not the existing robot-control website, and it is not connected to the physical robot or its firmware yet. A future frontend integration can send authenticated session events to this API.
+
 

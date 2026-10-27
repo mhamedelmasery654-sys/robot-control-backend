@@ -9,6 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preload" as="image" href="./public/media/hero-reference.png">
   <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/simulator.css">
   <script type="importmap">{"imports":{"three":"./public/vendor/three.module.js"}}</script>
 </head>
 <body>
@@ -50,11 +51,20 @@
       <div class="hero-hud hud-top" aria-hidden="true"><span>SYS / 036</span><i></i><span>LIVE SIGNAL</span></div>
       <div class="hero-hud hud-bottom" aria-hidden="true"><span class="hud-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>EMBEDDED · ELECTRICAL · SOFTWARE</span></div>
       <div class="screen-scan screen-main" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="robot-orbit" aria-label="Interactive animated 3D robot model. Drag to rotate; scroll to zoom.">
-        <canvas id="robot-canvas"></canvas>
-        <div class="robot-loading" id="robot-loading"><span class="loader-ring"></span><span>LOADING 3D SYSTEM</span></div>
-        <div class="orbit-label"><span class="orbit-dot"></span><span data-en="3D MODEL · DRAG TO ROTATE" data-ar="مجسم ثلاثي الأبعاد · اسحب للتدوير">3D MODEL · DRAG TO ROTATE</span></div>
-        <div class="orbit-controls"><button id="model-reset" type="button" aria-label="Reset 3D view">↺</button><button id="model-pause" type="button" aria-label="Pause 3D motion">Ⅱ</button></div>
+      <div class="factory-orbit" id="factory-orbit" aria-label="Interactive realistic factory model. Drag to rotate; scroll to zoom.">
+        <canvas id="factory-canvas"></canvas>
+        <div class="factory-loading" id="factory-loading"><span class="loader-ring"></span><span>LOADING FACTORY MODEL</span></div>
+        <div class="factory-ident"><span class="status-dot"></span><span>FACTORY / REALISTIC V3</span><i>837 OBJECTS</i></div>
+        <div class="factory-views" role="group" aria-label="Factory view mode">
+          <button type="button" data-factory-view="exterior" class="active" data-en="EXTERIOR" data-ar="الخارج">EXTERIOR</button>
+          <button type="button" data-factory-view="interior" data-en="INTERIOR" data-ar="الداخل">INTERIOR</button>
+          <button type="button" data-factory-view="cutaway" data-en="CUTAWAY" data-ar="مقطع داخلي">CUTAWAY</button>
+          <button type="button" id="factory-door-toggle" data-en="OPEN LOADING DOOR" data-ar="فتح باب التحميل">OPEN LOADING DOOR</button>
+          <button type="button" id="factory-reset" aria-label="Reset factory view">↺</button>
+        </div>
+        <a class="factory-source" href="./public/models/factory_realistic_v3.blend" download data-en="BLENDER SOURCE ↓" data-ar="ملف Blender ↓">BLENDER SOURCE ↓</a>
+        <a class="factory-glb-source" href="./public/models/factory-realistic-v3.glb" download>GLB ↓</a>
+        <div class="factory-caption" data-en="DRAG TO ORBIT · SCROLL TO ZOOM" data-ar="اسحب للتدوير · مرر للتقريب">DRAG TO ORBIT · SCROLL TO ZOOM</div>
       </div>
       <a class="hero-scroll" href="#projects"><span data-en="SCROLL TO PROJECTS" data-ar="انتقل إلى المشاريع">SCROLL TO PROJECTS</span><i></i></a>
       <div class="hero-edge-light" aria-hidden="true"></div>
@@ -74,9 +84,29 @@
         <div class="project-content"><div class="project-kicker"><span class="project-dot gold"></span><span data-en="INDUSTRIAL 3D · BLENDER" data-ar="نمذجة صناعية · Blender">INDUSTRIAL 3D · BLENDER</span><span class="project-state gold-state" data-en="CONCEPT MODEL" data-ar="نموذج تصوري">CONCEPT MODEL</span></div><h3 data-en="Olive Oil Processing<br>Line · EV-036" data-ar="خط استخلاص زيت الزيتون<br>EV-036">Olive Oil Processing<br>Line · EV-036</h3><p data-en="A connected visual layout from olive receiving and washing through extraction, settling and filtration to the filtered-oil tank. Product, service and waste paths are distinguished." data-ar="تصور بصري مترابط يبدأ من استقبال الزيتون وغسله، مرورًا بالاستخلاص والترسيب والترشيح، وصولًا إلى خزان الزيت المرشح مع تمييز مسارات المنتج والخدمات والمخلفات.">A connected visual layout from olive receiving and washing through extraction, settling and filtration to the filtered-oil tank. Product, service and waste paths are distinguished.</p><div class="project-tags"><span>Blender 5.2</span><span>Process visualization</span><span>Equipment layout</span></div><div class="project-actions"><a class="text-link" href="./public/models/olive-line-ev036.blend" download><span data-en="DOWNLOAD BLENDER SCENE" data-ar="تحميل ملف Blender">DOWNLOAD BLENDER SCENE</span> ↓</a><a class="text-link gold-link" href="./public/media/factory-flow-ev036.png" target="_blank" rel="noreferrer"><span data-en="VIEW PROCESS MAP" data-ar="عرض خريطة المسار">VIEW PROCESS MAP</span> ↗</a></div><small class="project-caveat" data-en="Concept visualization only — not to scale and not a manufacturing or execution drawing. Commercial permission and contribution credits must be confirmed before public release." data-ar="تصور مفاهيمي فقط، غير مقياسي وليس رسم تصنيع أو تنفيذ. يجب تأكيد إذن النشر ونسبة المساهمة قبل الإتاحة العامة.">Concept visualization only — not to scale and not a manufacturing or execution drawing. Commercial permission and contribution credits must be confirmed before public release.</small></div>
       </article>
 
-      <article class="project-feature model-feature reveal" id="interactive-model">
-        <div class="project-content model-copy"><div class="project-kicker"><span class="project-dot red"></span><span data-en="INTERACTIVE 3D VIEWER" data-ar="عارض ثلاثي الأبعاد تفاعلي">INTERACTIVE 3D VIEWER</span><span class="project-state" data-en="GLB / BLENDER SOURCE" data-ar="GLB / مصدر Blender">GLB / BLENDER SOURCE</span></div><h3 data-en="A model you<br>can explore." data-ar="نموذج يمكنك<br>استكشافه بنفسك.">A model you<br>can explore.</h3><p data-en="Drag the model to rotate it, use the wheel to zoom, or let the lighting and motion reveal the details. The scene is loaded from the project's actual GLB asset." data-ar="اسحب النموذج لتدويره واستخدم عجلة الفأرة للتقريب، أو اترك الحركة والإضاءة تكشف التفاصيل. المشهد محمّل من ملف GLB الفعلي للمشروع.">Drag the model to rotate it, use the wheel to zoom, or let the lighting and motion reveal the details. The scene is loaded from the project's actual GLB asset.</p><div class="project-actions"><a class="text-link" href="./public/models/robot-v2.glb" download><span data-en="DOWNLOAD ROBOT MODEL" data-ar="تحميل نموذج الروبوت">DOWNLOAD ROBOT MODEL</span> ↓</a><a class="text-link gold-link" href="./public/models/controller2.glb" download><span data-en="DOWNLOAD CONTROLLER MODEL" data-ar="تحميل نموذج يد التحكم">DOWNLOAD CONTROLLER MODEL</span> ↓</a></div></div>
-        <div class="model-stage"><img class="model-fallback" src="./public/media/controller-detail-v3.png" alt=""><canvas id="detail-canvas"></canvas><div class="model-screen"><div class="screen-chrome"><span></span><span></span><span></span></div><div class="screen-lines"><i></i><i></i><i></i><i></i><i></i><b></b></div><div class="screen-sweep"></div></div><div class="stage-halo"></div><div class="stage-label"><span class="status-dot"></span><span>CONTROLLER V2 · INTERACTIVE</span><span class="stage-size">GLB / 4.1 MB</span></div><div class="stage-caption" data-en="Drag to orbit · Scroll to zoom" data-ar="اسحب للتدوير · مرر للتقريب">Drag to orbit · Scroll to zoom</div></div>
+      <article class="project-feature model-feature demo-feature reveal" id="interactive-model">
+        <div class="demo-copy">
+          <div class="project-kicker"><span class="project-dot red"></span><span data-en="SHARED INTERACTIVE LAB" data-ar="مختبر تفاعلي مشترك">SHARED INTERACTIVE LAB</span><span class="project-state" data-en="2-MINUTE TURNS" data-ar="دور لمدة دقيقتين">2-MINUTE TURNS</span></div>
+          <h3 data-en="Take the controls.<br><em>Move together.</em>" data-ar="جرّب وحدات التحكم.<br><em>وشاهد الحركة مباشرة.</em>">Take the controls.<br><em>Move together.</em></h3>
+          <p data-en="Choose the gamepad, remote or laptop. The person holding the turn controls the browser-only robot, and every connected visitor sees the same movement and laptop screen." data-ar="اختر يد التحكم أو الريموت أو اللابتوب. يتحكم صاحب الدور بالروبوت الافتراضي، ويرى جميع الزوار المتصلين الحركة نفسها وتغيّر شاشة اللابتوب.">Choose the gamepad, remote or laptop. The person holding the turn controls the browser-only robot, and every connected visitor sees the same movement and laptop screen.</p>
+          <div class="sim-connection"><i id="sim-connection-dot"></i><span id="sim-connection-label" data-en="CONNECTING TO SHARED SESSION" data-ar="جارٍ الاتصال بالجلسة المشتركة">CONNECTING TO SHARED SESSION</span></div>
+          <div class="sim-queue-card"><div><span data-en="YOUR TURN" data-ar="دورك">YOUR TURN</span><strong id="sim-queue-position">Connecting…</strong></div><div><span data-en="TURN ENDS" data-ar="ينتهي الدور">TURN ENDS</span><strong id="sim-time-left">--:--</strong></div><small id="sim-queue-count">Waiting for the shared session…</small></div>
+          <div class="sim-session-actions"><button type="button" class="button button-primary" id="demo-join" hidden data-en="JOIN THE QUEUE" data-ar="انضم إلى الانتظار">JOIN THE QUEUE <span>↗</span></button><button type="button" class="button button-quiet" id="demo-release" data-en="PASS THE TURN" data-ar="إنهاء دوري">PASS THE TURN <span>→</span></button></div>
+          <small class="project-caveat" data-en="A shared visual simulation only. It does not connect to or move a physical robot." data-ar="محاكاة بصرية مشتركة فقط؛ لا تتصل بروبوت فعلي ولا تحركه.">A shared visual simulation only. It does not connect to or move a physical robot.</small>
+        </div>
+        <div class="demo-robot-stage">
+          <canvas id="demo-robot-canvas" aria-label="Shared 3D robot simulation"></canvas>
+          <div class="demo-stage-top"><span><i class="status-dot"></i> <b>ROBOT / LIVE STATE</b></span><span id="demo-light-state">LIGHTS OFF</span></div>
+          <div class="demo-robot-shadow"></div>
+          <div class="stage-caption" data-en="DRAG TO ORBIT · SCROLL TO ZOOM" data-ar="اسحب للتدوير · مرر للتقريب">DRAG TO ORBIT · SCROLL TO ZOOM</div>
+          <div class="demo-drive-badge" id="demo-drive-badge">IDLE</div>
+          <a class="robot-download" href="./public/models/robot-v2.glb" download data-en="ROBOT GLB ↓" data-ar="نموذج الروبوت GLB ↓">ROBOT GLB ↓</a>
+        </div>
+        <div class="demo-device-panel">
+          <div class="demo-device-heading"><div><span data-en="ACTIVE CONTROL UNIT" data-ar="وحدة التحكم النشطة">ACTIVE CONTROL UNIT</span><strong id="demo-device-name">PS1 GAMEPAD</strong><a class="device-download" id="demo-device-download" href="./public/models/controller2.glb" download data-en="DOWNLOAD 3D MODEL ↓" data-ar="تحميل النموذج ثلاثي الأبعاد ↓">DOWNLOAD 3D MODEL ↓</a></div><div class="demo-device-arrows"><button type="button" id="demo-device-prev" aria-label="Previous control unit">←</button><span id="demo-device-count">01 / 03</span><button type="button" id="demo-device-next" aria-label="Next control unit">→</button></div></div>
+          <div class="demo-device-stage"><canvas id="demo-device-canvas" aria-label="Interactive 3D controller, remote or laptop"></canvas><div class="laptop-screen" id="laptop-screen" aria-live="polite"><img id="laptop-screen-image" src="./public/media/robot-showroom-v3.png" alt="Robot engineering project shown on the laptop screen"><span>LIVE SCREEN / <b id="laptop-screen-index">01</b></span></div><div class="stage-caption" data-en="3D DEVICE · DRAG TO ROTATE" data-ar="جهاز ثلاثي الأبعاد · اسحب للتدوير">3D DEVICE · DRAG TO ROTATE</div></div>
+          <div class="demo-device-tools"><div class="direction-pad" role="group" aria-label="Robot direction controls"><button type="button" data-drive="forward" aria-label="Move forward">↑</button><button type="button" data-drive="left" aria-label="Turn left">←</button><button type="button" data-drive="reverse" aria-label="Move backward">↓</button><button type="button" data-drive="right" aria-label="Turn right">→</button></div><button type="button" class="light-toggle" id="demo-lights"><span>ϟ</span><b data-en="ROBOT LIGHTS" data-ar="إضاءة الروبوت">ROBOT LIGHTS</b><i>OFF</i></button><div class="laptop-tools" id="laptop-tools"><span data-en="LAPTOP SCREEN" data-ar="شاشة اللابتوب">LAPTOP SCREEN</span><button type="button" id="screen-prev" aria-label="Previous laptop image">←</button><button type="button" id="screen-next" aria-label="Next laptop image">→</button></div><span class="drive-hint" data-en="ARROWS / WASD ALSO WORK" data-ar="تعمل أيضًا الأسهم وWASD">ARROWS / WASD ALSO WORK</span></div>
+        </div>
       </article>
 
       <div class="project-note reveal"><span class="note-icon">i</span><p data-en="Additional CV projects include a multi-sensor robot car, a self-balancing robot and an APFC study. They can be added as full case studies when their source files and results are ready to share." data-ar="تتضمن السيرة أيضًا سيارة روبوت متعددة الحساسات وروبوتًا ذاتي التوازن ودراسة لتحسين معامل القدرة. يمكن إضافتها كدراسات حالة عند تجهيز ملفاتها ونتائجها للمشاركة.">Additional CV projects include a multi-sensor robot car, a self-balancing robot and an APFC study. They can be added as full case studies when their source files and results are ready to share.</p></div>
@@ -149,3 +179,4 @@
   <script type="module" src="./assets/main.js"></script>
 </body>
 </html>
+

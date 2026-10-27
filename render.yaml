@@ -15,10 +15,11 @@ services:
       - key: RUN_MIGRATIONS
         value: "true"
       - key: PUBLIC_ORIGINS
-        value: http://localhost:8765,http://127.0.0.1:8765
+        value: http://localhost:8765,http://127.0.0.1:8765,http://localhost:5173,http://127.0.0.1:5173,https://mhamedelmasery654-sys.github.io
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
         sync: false
       - key: MONGODB_URI
         sync: false
+
