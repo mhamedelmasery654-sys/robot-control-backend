@@ -2,6 +2,8 @@
 
 const { z } = require('zod');
 
+const PORTFOLIO_ORIGIN = 'https://mhamedelmasery654-sys.github.io';
+
 const configSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(8787),
@@ -31,7 +33,10 @@ function loadConfig(env = process.env) {
     throw error;
   }
   const value = parsed.data;
-  const origins = value.PUBLIC_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean);
+  const origins = [...new Set([
+    ...value.PUBLIC_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean),
+    PORTFOLIO_ORIGIN
+  ])];
   if (env.RENDER_EXTERNAL_URL) {
     try {
       origins.push(new URL(env.RENDER_EXTERNAL_URL).origin);
@@ -57,3 +62,4 @@ function loadConfig(env = process.env) {
 }
 
 module.exports = { loadConfig };
+
